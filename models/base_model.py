@@ -10,17 +10,10 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         if kwargs != {}:
             for key, value in kwargs.items():
-                match key:
-                    case 'id':
-                        self.id = value
-                        break
-                    case 'created_at':
-                        self.created_at = datetime.fromisoformat(value)
-                        break
-                    case 'updated_at':
-                        self.updated_at = datetime.fromisoformat(value)
-                        break
-
+                if key != '__class__':
+                    if key =='created_at' or key == 'updated_at':
+                        value = datetime.fromisoformat(value)
+                    self.__dict__[key] = value
         else:
             self.id = str(uuid4())
             self.created_at = datetime.today()
@@ -51,13 +44,13 @@ def main():
     print("JSON of my_model:")
     for key in my_model_json.keys():
         print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
-        print('---------------------------------------------------------------')
-        my_new_model = BaseModel(**my_model_json)
-        #print(my_new_model.id)
-        print(my_new_model)
-        print(type(my_new_model.created_at))
-        print('-----------------------------------------------')
-        print(my_model is my_new_model)
+    print('---------------------------------------------------------------')
+    my_new_model = BaseModel(**my_model_json)
+    print(my_new_model.id)
+    print(my_new_model)
+    print(type(my_new_model.created_at))
+    print('-----------------------------------------------')
+    print(my_model is my_new_model)
 if __name__ == '__main__':
     main()
 
