@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
+#from models.base_model import BaseModel
+#import storage
 import cmd
-from .models.base_model import BaseModel
-import storage
 
 
 class HBNBCommand(cmd.Cmd):

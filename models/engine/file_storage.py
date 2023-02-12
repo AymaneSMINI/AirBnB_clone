@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-import sys
-from base_model import BaseModel
-sys.path.append("..")
+from models.base_model import BaseModel
 
 
 class FileStorage:
