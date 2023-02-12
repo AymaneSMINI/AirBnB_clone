@@ -1,9 +1,12 @@
 #!/usr/bin/python3
+
 import sys
-sys.path.append("..")
 from base_model import BaseModel
+sys.path.append("..")
+
 
 class FileStorage:
+    """File Strage class"""
 
     __file_path = ""
     __objects = {}
@@ -16,14 +19,14 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        with open("file.json","w") as f:
+        with open("file.json", "w") as f:
             f.write(str(self.__objects))
             self.__file_path = "file.json"
 
     def reload(self):
         if self.__file_path != "":
-            with open(self.__file_path,"r") as f:
-                data = f.read().replace("\n","")
+            with open(self.__file_path, "r") as f:
+                data = f.read().replace("\n", "")
             self.__objects = data
 
 
@@ -34,6 +37,7 @@ def main():
     File.new(b)
     File.new(c)
     File.save()
+
 
 if __name__ == '__main__':
     main()

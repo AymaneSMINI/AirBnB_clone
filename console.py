@@ -3,6 +3,8 @@
 import cmd
 from .models.base_model import BaseModel
 import storage
+
+
 class HBNBCommand(cmd.Cmd):
     """command line"""
     prompt = '(hbnb) '
@@ -14,9 +16,11 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """EOF command to exit the program"""
         return True
+
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
+
     def do_create(self, line):
         if line is None or line == "":
             print("** class name missing **")
@@ -27,10 +31,5 @@ class HBNBCommand(cmd.Cmd):
             print(dir(my_model))
 
 
-
-def main():
-    HBNBCommand().cmdloop()
-
 if __name__ == '__main__':
-    main()
-
+    HBNBCommand().cmdloop()
