@@ -2,35 +2,40 @@
 
 from uuid import uuid4
 from datetime import datetime
+import storage
 
 
 class BaseModel:
+
     """This is the BaseModel Class"""
-    
     def __init__(self, *args, **kwargs):
         if kwargs != {}:
             for key, value in kwargs.items():
                 if key != '__class__':
-                    if key =='created_at' or key == 'updated_at':
+                    if key == 'created_at' or key == 'updated_at':
                         value = datetime.fromisoformat(value)
                     self.__dict__[key] = value
         else:
             self.id = str(uuid4())
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
+            storage.new(self)
+
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.today()
+        storage.save()
 
     def to_dict(self):
-        dictionary = {'__class__':self.__class__.__name__}
+        dictionary = {'__class__': self.__class__.__name__}
         for key, value in self.__dict__.items():
             if key == 'updated_at' or key == 'created_at':
                 value = value.isoformat()
             dictionary[key] = value
         return dictionary
+
 
 def main():
     my_model = BaseModel()
@@ -51,6 +56,7 @@ def main():
     print(type(my_new_model.created_at))
     print('-----------------------------------------------')
     print(my_model is my_new_model)
+
+
 if __name__ == '__main__':
     main()
-

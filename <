@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+
+import cmd
+
+class HBNBCommand(cmd.Cmd):
+    """command line"""
+    prompt = '(hbnb)'
+
+    def do_quit(self):
+        return True
+
+    def EOF(self):
+        return True
+
+
+    def do_help(self):
+        print()
+        print("Documented commands (type help <topic>):")
+        print("========================================")
+        print(Cmd.help)
+
+def main():
+    HBNBCommand().cmdloop()
+
+if __name__ == '__main__':
+    main()
+
